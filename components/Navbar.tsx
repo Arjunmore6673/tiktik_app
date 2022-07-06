@@ -2,10 +2,14 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { GoogleLogin, GoogleLogout } from '@react-oauth/google';
+import { googleLogout, GoogleLogin } from '@react-oauth/google';
 import Logo from '../utils/tiktik-logo.png';
+import { createOrGetUser } from '../utils';
+import useAuthStore from '../store/authStore';
 
 const Navbar = () => {
+  const { userProfile, addUser } = useAuthStore();
+
   return (
     <div
       className="w-full flex justify-between items-center 
@@ -21,6 +25,21 @@ const Navbar = () => {
           />
         </div>
       </Link>
+      <div>GoogleLogin</div>
+      <div>
+        {userProfile ? (
+          <div>user already logged in</div>
+        ) : (
+          <GoogleLogin
+            onSuccess={(res) => {
+              createOrGetUser(res, addUser);
+            }}
+            onError={() => {
+              console.log('error');
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 };
