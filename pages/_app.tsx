@@ -1,9 +1,9 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import { useEffect, useState } from 'react';
+import { Component, useEffect, useState } from 'react';
 import { Navbar, SideBar } from '../components';
 
-const MyApp = ({}) => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   //server side rendering.
   const [isSSR, setIsSSR] = useState(true);
 
@@ -20,7 +20,7 @@ const MyApp = ({}) => {
           <SideBar />
         </div>
         <div className="mt-4 flex flex-col gap-10 overflow-auto h-[88vh] videos flex-1">
-          {/* <Component {...pageProps} /> */}
+          <Component {...pageProps} />
         </div>
       </div>
     </div>
