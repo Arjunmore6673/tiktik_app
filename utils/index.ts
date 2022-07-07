@@ -23,3 +23,5 @@ export const createOrGetUser = async (response: any, addUser: any) => {
   // make api call
   await axios.post(`http://localhost:3000/api/auth`, user);
 };
+
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
